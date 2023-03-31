@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 
 import 'app/Di/dependencies_injection.dart';
 import 'app/features/cash_king/presentation/views/user_profile.dart';
+import 'app/features/cash_king/presentation/widget/my_offer_page/detail_page.dart';
+import 'app/features/cash_king/presentation/widget/my_offer_page/offer_detail_page.dart';
 
 Future<void> main() async {
   await Di.init();

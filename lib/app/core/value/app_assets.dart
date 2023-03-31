@@ -20,6 +20,8 @@ class AppAssets {
   static const appAllOffer = "$_basicSvgPath/app_all_offer.svg";
   static const appMore1 = "$_basicSvgPath/more1.svg";
   static const appMore2 = "$_basicSvgPath/more2.svg";
+  static const circle = "$_basicSvgPath/circle.svg";
+  static const appProgress = "$_basicSvgPath/progress.svg";
   static const appMore3 = "$_basicSvgPath/more3.svg";
   static const appMore4 = "$_basicSvgPath/more5.svg";
   static const backArrow = "$_basicSvgPath/back_arrow.svg";

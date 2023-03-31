@@ -240,14 +240,20 @@ class MyOfferPage extends StatelessWidget {
   }
 
   trendingTitle({required String icon, required String title}) {
-    return Row(
-      children: [
-        SvgPicture.asset(
-          icon,
-          color: AppColors.appRectangleColor4,
-        ),
-        Text(title),
-      ],
+    return Padding(
+      padding: EdgeInsets.only(left: 8.0),
+      child: Row(
+        children: [
+          SvgPicture.asset(
+            icon,
+            color: AppColors.appRectangleColor4,
+          ),
+          SizedBox(
+            width: AppDimen.unitWidth * 4,
+          ),
+          Text(title),
+        ],
+      ),
     );
   }
 
@@ -292,40 +298,57 @@ class MyOfferPage extends StatelessWidget {
                       bottomLeft: Radius.circular(AppDimen.unitHeight * 8),
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      Text(
-                        "Alto's Odysseyz",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.appWhiteColor,
-                            fontFamily: "DM Sans",
-                            fontSize: AppDimen.unitHeight * 12),
-                      ),
-                      Text(
-                        "Get Rs. 230",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.appWhiteColor,
-                            fontFamily: "DM Sans",
-                            fontSize: AppDimen.unitHeight * 12),
-                      ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            AppAssets.appHotR,
-                          ),
-                          Text(
-                            "4, 687 users",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: AppColors.appWhiteColor,
-                                fontFamily: "DM Sans",
-                                fontSize: AppDimen.unitHeight * 10),
-                          ),
-                        ],
-                      ),
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.only(left: AppDimen.unitHeight * 8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: AppDimen.unitHeight * 4,
+                        ),
+                        Text(
+                          "Alto's Odysseyz",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.appWhiteColor,
+                              fontFamily: "DM Sans",
+                              fontSize: AppDimen.unitHeight * 10),
+                        ),
+                        SizedBox(
+                          height: AppDimen.unitHeight * 2,
+                        ),
+                        Text(
+                          "Get Rs. 230",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.appWhiteColor,
+                              fontFamily: "DM Sans",
+                              fontSize: AppDimen.unitHeight * 12),
+                        ),
+                        SizedBox(
+                          height: AppDimen.unitHeight * 2,
+                        ),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              AppAssets.appHotR,
+                            ),
+                            SizedBox(
+                              width: AppDimen.unitWidth * 3,
+                            ),
+                            Text(
+                              "4, 687 users",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: AppColors.appWhiteColor,
+                                  fontFamily: "DM Sans",
+                                  fontSize: AppDimen.unitHeight * 10),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 )
               ],
@@ -347,26 +370,40 @@ class MyOfferPage extends StatelessWidget {
           height: AppDimen.height * 0.32,
           child: ListView(
             children: [
-              GestureDetector(
+              InkWell(
                 onTap: () {
-                  Get.to(OfferDetailPage());
+                  Get.off(OfferDetailPage());
                 },
                 child: moreDetail(
                   color: AppColors.appRectangleColor1,
                   image: AppAssets.image3,
                 ),
               ),
-              moreDetail(
-                color: AppColors.appRectangleColor2,
-                image: AppAssets.image4,
+              InkWell(
+                onTap: () {
+                  Get.to(OfferDetailPage());
+                },
+                child: moreDetail(
+                  color: AppColors.appRectangleColor2,
+                  image: AppAssets.image4,
+                ),
               ),
-              moreDetail(
-                color: AppColors.appRectangleColor3,
-                image: AppAssets.image5,
-              ),
-              moreDetail(
-                color: AppColors.appRectangleColor4,
-                image: AppAssets.image6,
+              InkWell(
+                  onTap: () {
+                    Get.to(OfferDetailPage());
+                  },
+                  child: moreDetail(
+                    color: AppColors.appRectangleColor3,
+                    image: AppAssets.image5,
+                  )),
+              InkWell(
+                onTap: () {
+                  Get.to(OfferDetailPage());
+                },
+                child: moreDetail(
+                  color: AppColors.appRectangleColor4,
+                  image: AppAssets.image6,
+                ),
               )
             ],
           ),

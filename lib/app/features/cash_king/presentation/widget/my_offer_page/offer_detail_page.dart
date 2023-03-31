@@ -4,6 +4,7 @@ import 'package:assignment/app/core/value/app_assets.dart';
 import 'package:assignment/app/core/value/app_colors.dart';
 import 'package:assignment/app/core/value/app_diemen.dart';
 import 'package:assignment/app/core/value/app_strings.dart';
+import 'package:assignment/app/features/cash_king/presentation/widget/my_offer_page/my_offer_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,14 @@ class OfferDetailPage extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(child: SvgPicture.asset(AppAssets.backArrow)),
+            Expanded(
+              child: InkWell(
+                onTap: () {
+                  Get.to(MyOfferPage());
+                },
+                child: SvgPicture.asset(AppAssets.backArrow),
+              ),
+            ),
             const Expanded(
               flex: 4,
               child: Text(
@@ -78,7 +86,10 @@ class OfferDetailPage extends StatelessWidget {
         color: AppColors.appWhiteColor,
         borderRadius: BorderRadius.circular(AppDimen.unitHeight * 10),
       ),
-      child: detailColumn(),
+      child: Padding(
+        padding: EdgeInsets.all(AppDimen.unitHeight * 6),
+        child: detailColumn(),
+      ),
     );
   }
 
@@ -95,7 +106,60 @@ class OfferDetailPage extends StatelessWidget {
           height: AppDimen.unitHeight * 4,
         ),
         stepText(),
-        installApplicationContainer()
+        SizedBox(
+          height: AppDimen.unitHeight * 10,
+        ),
+        installApplicationContainer(
+          icon: AppAssets.appCheck,
+          textTitle: AppStrings.installTitle,
+          isCanecelText: true,
+          icoCircleColor: AppColors.appWhiteColor,
+          iconCircleColor: AppColors.appRectangleColor1,
+          textColor: AppColors.appBlackColor,
+          textBackgroundColor: AppColors.appRectangleColor1,
+          textPriceColor: AppColors.appWhiteColor,
+          borderColor: AppColors.appRectangleColor1,
+        ),
+        SizedBox(
+          height: AppDimen.unitHeight * 10,
+        ),
+        completeContaner(),
+        SizedBox(
+          height: AppDimen.unitHeight * 10,
+        ),
+        installApplicationContainer(
+          icon: AppAssets.circle,
+          textTitle: AppStrings.referFriendWorkStation,
+          isCanecelText: false,
+          icoCircleColor: Colors.grey,
+          iconCircleColor: Colors.grey,
+          textColor: AppColors.appBlackColor,
+          textBackgroundColor: AppColors.appWhiteColor.withOpacity(0.5),
+          textPriceColor: AppColors.appLinearGradient1,
+          borderColor: Colors.grey,
+        ),
+        SizedBox(
+          height: AppDimen.unitHeight * 10,
+        ),
+        installApplicationContainer(
+          icon: AppAssets.circle,
+          textTitle: AppStrings.withdrawTitle,
+          isCanecelText: false,
+          icoCircleColor: Colors.grey,
+          iconCircleColor: Colors.grey,
+          textColor: AppColors.appBlackColor,
+          textBackgroundColor: AppColors.appWhiteColor.withOpacity(0.5),
+          textPriceColor: AppColors.appLinearGradient1,
+          borderColor: Colors.grey,
+        ),
+        SizedBox(
+          height: AppDimen.unitHeight * 40,
+        ),
+        alreadyPaid(),
+        SizedBox(
+          height: AppDimen.unitHeight * 10,
+        ),
+        button()
       ],
     );
   }
@@ -125,22 +189,172 @@ class OfferDetailPage extends StatelessWidget {
     );
   }
 
-  installApplicationContainer() {
+  installApplicationContainer({
+    required String icon,
+    required Color icoCircleColor,
+    required Color textColor,
+    required Color textBackgroundColor,
+    required Color textPriceColor,
+    required Color borderColor,
+    required String textTitle,
+    required bool isCanecelText,
+    required Color iconCircleColor,
+  }) {
     return Container(
       height: AppDimen.height * 0.06,
       width: AppDimen.width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppDimen.unitHeight * 8),
-        border: Border.all(
-            width: AppDimen.unitWidth * 1, color: AppColors.appRectangleColor1),
+        border: Border.all(width: AppDimen.unitWidth * 1, color: borderColor),
       ),
-      child: installCancelRow(),
+      child: installCancelRow(
+          icon: icon,
+          icoCircleColor: icoCircleColor,
+          textColor: textColor,
+          textBackgroundColor: textBackgroundColor,
+          textPriceColor: textPriceColor,
+          borderColor: borderColor,
+          textTitle: textTitle,
+          isCanecelText: isCanecelText,
+          iconCircleColor: iconCircleColor),
     );
   }
 
-  installCancelRow() {
+  completeContaner() {
+    return Container(
+      height: AppDimen.height * 0.23,
+      width: AppDimen.width,
+      decoration: BoxDecoration(
+        border: Border.all(color: AppColors.appRectangleColor5, width: 1),
+        borderRadius: BorderRadius.circular(AppDimen.unitHeight*10)
+      ),
+      child: completeDetail(),
+    );
+  }
+
+  completeDetail() {
+    return Padding(
+      padding:  EdgeInsets.all(AppDimen.unitHeight*8),
+      child: Column(
+        children: [
+          SizedBox(
+            height: AppDimen.unitHeight * 10,
+          ),
+          installApplicationContainer(
+              icon: AppAssets.appProgress,
+              icoCircleColor: AppColors.appWhiteColor,
+              textColor: AppColors.appBlackColor,
+              textBackgroundColor: AppColors.appRectangleColor5,
+              textPriceColor: AppColors.appWhiteColor,
+              borderColor: Colors.grey,
+              iconCircleColor: AppColors.appRectangleColor5,
+              textTitle: AppStrings.completeOffer,
+              isCanecelText: false),
+          SizedBox(
+            height: AppDimen.unitHeight * 10,
+          ),
+          Text(
+            AppStrings.lorenSpanTitle,
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: AppColors.appBlackColor.withOpacity(0.5),
+                fontFamily: "DM Sans",
+                // decoration: decoration,
+                fontSize: AppDimen.unitHeight * 10),
+          )
+        ],
+      ),
+    );
+  }
+
+  installCancelRow({
+    required String icon,
+    required Color textPriceColor,
+    required Color textBackgroundColor,
+    required Color textColor,
+    required Color icoCircleColor,
+    required Color borderColor,
+    required String textTitle,
+    required bool isCanecelText,
+    required Color iconCircleColor,
+  }) {
     return Row(
-      children: [SvgPicture.asset(AppAssets.appVector)],
+      children: [
+        Expanded(
+          flex: 6,
+          child: Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: Stack(
+                  children: [
+                    Center(
+                      child: SvgPicture.asset(
+                        AppAssets.circle,
+                        color: iconCircleColor,
+                      ),
+                    ),
+                    Positioned(
+                      left: 0,
+                      right: 3,
+                      top: 0,
+                      bottom: 0,
+                      child: Center(
+                        child: SvgPicture.asset(
+                          icon,
+                          color: icoCircleColor,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 5,
+                child: Text(
+                  textTitle,
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: textColor,
+                      fontFamily: "DM Sans",
+                      decoration: isCanecelText == true
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
+                      fontSize: AppDimen.unitHeight * 10),
+                ),
+              )
+            ],
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding:  const EdgeInsets.only(right:8.0),
+            child: Container(
+              height: AppDimen.unitHeight * 20,
+              width: AppDimen.unitWidth * 50,
+              decoration: BoxDecoration(
+                  color: textBackgroundColor,
+                  borderRadius: BorderRadius.circular(AppDimen.unitHeight * 10),
+                  boxShadow: [
+                    BoxShadow(
+                        offset: Offset(0.4, 0.4),
+                        color: Colors.grey.withOpacity(0.5)),
+                  ]),
+              child: Center(
+                child: Text(
+                  "₹20",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      color: textPriceColor,
+                      fontFamily: "DM Sans",
+                      fontSize: AppDimen.unitHeight * 10),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -195,6 +409,60 @@ class OfferDetailPage extends StatelessWidget {
                 color: Colors.grey,
               );
       },
+      itemCount: 5,
+      scrollDirection: Axis.horizontal,
+    );
+  }
+
+  alreadyPaid() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 1,
+          child: SvgPicture.asset(
+            AppAssets.appHotR,
+            height: AppDimen.unitHeight * 10,
+            width: AppDimen.unitWidth * 10,
+            color: AppColors.appRectangleColor5,
+          ),
+        ),
+        Expanded(
+          flex: 6,
+          child: Text(
+            AppStrings.alreadyParticipatedTitle,
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                color: AppColors.appRectangleColor5,
+                fontFamily: "DM Sans",
+                // decoration: decoration,
+                fontSize: AppDimen.unitHeight * 10),
+          ),
+        )
+      ],
+    );
+  }
+
+  button() {
+    return Container(
+      height: AppDimen.unitHeight * 30,
+      width: AppDimen.width * 0.9,
+      decoration: BoxDecoration(
+        color: AppColors.appLinearGradient1,
+        borderRadius: BorderRadius.circular(AppDimen.unitWidth * 20),
+      ),
+      child: Center(
+        child: Text(
+          "Get Rs.220",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontWeight: FontWeight.w500,
+              color: AppColors.appWhiteColor,
+              fontFamily: "DM Sans",
+              // decoration: decoration,
+              fontSize: AppDimen.unitHeight * 12),
+        ),
+      ),
     );
   }
 }

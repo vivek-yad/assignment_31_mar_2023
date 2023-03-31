@@ -2,6 +2,7 @@ import 'package:assignment/app/features/cash_king/data/data_source/local_json_da
 import 'package:assignment/app/features/cash_king/data/data_source/local_json_data/abstract_json_data_source/imple_json_data_source.dart';
 import 'package:assignment/app/features/cash_king/data/repo_impl/repo_impl.dart';
 import 'package:assignment/app/features/cash_king/domain/use_cases/dummy_detail/implement_dummy_detail.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -15,8 +16,11 @@ import '../features/cash_king/presentation/controller/dummy_and_detail.dart';
 
 class Di{
  static init() async {
+    // await Firebase.initializeApp(
+    // );
     await Hive.initFlutter();
     ///Hive.registerAdapter(UserAdapter());
+    ///
     WidgetsFlutterBinding.ensureInitialized();
     final appDocumentDir = await  getApplicationDocumentsDirectory();
     Hive.init(appDocumentDir.path);
